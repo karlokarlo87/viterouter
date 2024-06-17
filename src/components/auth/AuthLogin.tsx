@@ -3,11 +3,16 @@ import { useAuthUser } from "../../services/mutation";
 import { Auth } from "../../types/Auth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useUsersId } from "../../services/querises";
 //import { useAuth } from "../../context/AuthContext";
 //import axios from "axios";
 
 const AuthLogin = () => {
   // const navigate = useNavigate();
+
+  const usersIdsQuery = useUsersId(0);
+  const usersIdsQueryMap = usersIdsQuery.data["user"];
+  console.log(usersIdsQueryMap);
   const [isLogin, setIsLogin] = useState(false);
   const [isDeactivate, setIsDeactivate] = useState(false);
   const createUserMutation = useAuthUser();
