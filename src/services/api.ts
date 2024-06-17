@@ -51,7 +51,7 @@ export const createUser = async (data: UserCreate) => {
   return axiosInstance.post("users/create", data);
 };
 export const authUser = async (data: Auth) => {
-  return await axios.post("auth/login", data);
+  return await axiosInstance.post("auth/login", data);
 };
 export const updateUser = async (data: any) => {
   return await axiosInstanceFile.patch(`users/update`, data);
