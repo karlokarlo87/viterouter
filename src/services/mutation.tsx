@@ -11,6 +11,7 @@ import {
 import { Auth } from "../types/Auth";
 import { Resset } from "../types/Resset";
 import { UserCreate } from "../types/UserCreate";
+import axios from "axios";
 
 export function useAuthUser() {
   // const { setValue_ } = useAuth();
@@ -36,6 +37,10 @@ export function useAuthUser() {
     onSuccess: async (data) => {
       if (data?.data.status != 401 && data?.data.status != "deactivate") {
         localStorage.setItem("token", data?.data);
+        const BASE_URL = "https://shoppingcart.ge/api";
+        axios.defaults.baseURL = BASE_URL;
+        axios.defaults.headers.common["Authorization"] = "Bearer " + data?.data;
+        axios.defaults.headers.common["Content-Type"] = "application/json";
         //setValue_(data?.data);
       }
     },
