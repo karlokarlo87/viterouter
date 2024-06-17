@@ -12,7 +12,7 @@ export const AuthContext = ({ children }: any) => {
   const payload = tokenDecode(value1);
   const istockenexpared = isTokenExpired(value1);
 
-  const BASE_URL = "http://localhost:3000/api";
+  const BASE_URL = "https://shoppingcart/api";
   axios.defaults.baseURL = BASE_URL;
   axios.defaults.headers.common["Authorization"] = "Bearer " + value1;
   axios.defaults.headers.common["Content-Type"] = "application/json";
