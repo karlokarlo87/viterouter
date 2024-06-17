@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { useAuth } from "../context/AuthContext";
+//import { useAuth } from "../context/AuthContext";
 import {
   authUser,
   createUser,
@@ -13,7 +13,7 @@ import { Resset } from "../types/Resset";
 import { UserCreate } from "../types/UserCreate";
 
 export function useAuthUser() {
-  const { setValue_ } = useAuth();
+  // const { setValue_ } = useAuth();
 
   const queryClient = useQueryClient();
 
@@ -36,10 +36,10 @@ export function useAuthUser() {
     onSuccess: async (data) => {
       if (data?.data.status != 401 && data?.data.status != "deactivate") {
         localStorage.setItem("token", data?.data);
-        setValue_(data?.data);
+        //setValue_(data?.data);
       }
     },
-    onError: (error, variables, context) => {
+    onError: (error) => {
       // An error happened!
       console.log(error);
     },

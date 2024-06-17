@@ -3,7 +3,7 @@ import { Users } from "../types/Users";
 import { Auth } from "../types/Auth";
 import { Resset } from "../types/Resset";
 import { UserCreate } from "../types/UserCreate";
-import { useAuth } from "../context/AuthContext";
+//import { useAuth } from "../context/AuthContext";
 let getToken = localStorage.getItem("token");
 
 const BASE_URL = "https://shoppingcart/api";
@@ -29,7 +29,7 @@ export const getUsersIds = async () => {
   );
 };
 export const getUser = async (from: number) => {
-  return (await axiosInstance.get<Users>(`users/limit/${from}`)).data;
+  return (await axiosInstance.get(`users/limit/${from}`)).data;
 };
 export const getUserById = async (id: string) => {
   return (

@@ -8,7 +8,7 @@ import UserValidation from "../../validators/UserValidation";
 import { EamilFindUser, PhoneFindUser } from "../../services/querises";
 import UserFormInput from "./UserFormInputs";
 import { tokenDecode } from "../../functions/tokenDecode";
-const UserForm = ({ onSubmit, initialValue, createUserMutation }) => {
+const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
   const [emailErrors, setEmailErrors] = useState("");
   const [phoneErrors, setPhoneErrors] = useState("");
   const [fileImage, setFileImage] = useState("");
@@ -39,11 +39,13 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }) => {
   function handleChange(e: any) {
     const fr = new FileReader();
     fr.readAsArrayBuffer(e.target.files[0]);
-    fr.onload = function () {
-      const blob = new Blob([fr.result]);
-      const image = URL.createObjectURL(blob);
-      setFileImage(image);
-    };
+    const result = fr.result;
+    if (result)
+      fr.onload = function () {
+        const blob = new Blob([result]);
+        const image = URL.createObjectURL(blob);
+        setFileImage(image);
+      };
     setUsers({ ...users, ["file"]: e.target.files[0] });
   }
 
@@ -218,7 +220,7 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }) => {
         </div>
         <UserFormInput
           errors={errors}
-          handleChangeInput={(e) => handleChangeInput(e)}
+          handleChangeInput={(e: any) => handleChangeInput(e)}
           emailvalue={users["email"]}
           users={users}
           handleCheckEmail={handleCheckEmail}

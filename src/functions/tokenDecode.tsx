@@ -1,4 +1,4 @@
-export const tokenDecode = (token) => {
+export const tokenDecode = (token: any) => {
   if (!token) return false;
   var base64Url = token.split(".")[1];
   if (!base64Url) return false;
@@ -15,7 +15,7 @@ export const tokenDecode = (token) => {
 
   return JSON.parse(jsonPayload);
 };
-const decodeToken = (token) => {
+const decodeToken = (token: any) => {
   if (!token) return false;
   const base64Url = token.split(".")[1];
   if (!base64Url) return true;
@@ -31,7 +31,7 @@ const decodeToken = (token) => {
 
   return JSON.parse(jsonPayload);
 };
-export const isTokenExpired = (token) => {
+export const isTokenExpired = (token: any) => {
   if (token === null) return true;
   const decodedToken = decodeToken(token);
   const currentTime = Date.now() / 1000;

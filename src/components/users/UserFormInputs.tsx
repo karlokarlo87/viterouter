@@ -5,8 +5,8 @@ const UserFormInput = ({
   users,
   handleCheckEmail,
   emailErrors,
-}) => {
-  const handleCheckEmailIn = async (e) => {
+}: any) => {
+  const handleCheckEmailIn = async (e: any) => {
     e.preventDefault();
     const data = {
       email: e.target.value,

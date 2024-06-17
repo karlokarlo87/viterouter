@@ -1,4 +1,4 @@
-export default function SuccessMessage({ setIsFormSuccess }) {
+export default function SuccessMessage({ setIsFormSuccess }: any) {
   const removeModal = () => {
     setIsFormSuccess(false);
   };

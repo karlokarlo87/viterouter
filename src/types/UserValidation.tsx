@@ -1,5 +1,5 @@
 export interface userValidation {
-  id: number;
+  id?: number;
   name: string;
   lname: string;
   username: string;

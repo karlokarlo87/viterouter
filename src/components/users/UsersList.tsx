@@ -1,11 +1,18 @@
-import { useEffect, useState } from "react";
+import {
+  JSXElementConstructor,
+  Key,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+  useEffect,
+  useState,
+} from "react";
 import { useUsersId } from "../../services/querises";
 
 import { useParams, Link, Navigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+//import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 const PostList = () => {
-  const { setValue_ } = useAuth();
   let { from }: any = useParams();
   const usersIdsQuery = useUsersId(from);
   const [_isError, setIsError] = useState(false);
@@ -94,47 +101,84 @@ const PostList = () => {
             </tr>
           </thead>
           <tbody>
-            {usersIdsQueryMap.map((data, index) => (
-              <tr
-                key={index}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                <td
-                  scope="row"
-                  className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+            {usersIdsQueryMap.map(
+              (
+                data: {
+                  image: string;
+                  name: string;
+                  lname: string;
+                  email:
+                    | string
+                    | number
+                    | boolean
+                    | ReactElement<any, string | JSXElementConstructor<any>>
+                    | Iterable<ReactNode>
+                    | ReactPortal
+                    | null
+                    | undefined;
+                  role:
+                    | string
+                    | number
+                    | boolean
+                    | ReactElement<any, string | JSXElementConstructor<any>>
+                    | Iterable<ReactNode>
+                    | ReactPortal
+                    | null
+                    | undefined;
+                  phone:
+                    | string
+                    | number
+                    | boolean
+                    | ReactElement<any, string | JSXElementConstructor<any>>
+                    | Iterable<ReactNode>
+                    | ReactPortal
+                    | null
+                    | undefined;
+                  id: string;
+                },
+                index: Key | null | undefined
+              ) => (
+                <tr
+                  key={index}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src={"http://localhost:3000/asset/upload/" + data.image}
-                    alt="Jese image"
-                  />
-                  <div className="ps-3">
-                    <div className="text-base font-semibold">
-                      {" "}
-                      {data.name + " " + data.lname}
-                    </div>
-                    <div className="font-normal text-gray-500">
-                      {data.email}
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4"> {data.role}</td>
-                <td className="px-6 py-4">
-                  <div className="flex items-center">
-                    <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
-                    {data.phone}
-                  </div>
-                </td>
-                <td className="px-6 py-4">
-                  <Link
-                    to={"/users/view/" + data.id}
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  <td
+                    scope="row"
+                    className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
                   >
-                    Edit user
-                  </Link>
-                </td>
-              </tr>
-            ))}
+                    <img
+                      className="w-10 h-10 rounded-full"
+                      src={"http://localhost:3000/asset/upload/" + data.image}
+                      alt="Jese image"
+                    />
+                    <div className="ps-3">
+                      <div className="text-base font-semibold">
+                        {" "}
+                        {data.name + " " + data.lname}
+                      </div>
+                      <div className="font-normal text-gray-500">
+                        {data.email}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4"> {data.role}</td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center">
+                      <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>{" "}
+                      {data.phone}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <Link
+                      to={"/users/view/" + data.id}
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit user
+                    </Link>
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </table>
       </div>

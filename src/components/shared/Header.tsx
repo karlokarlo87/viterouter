@@ -1,49 +1,38 @@
-import { Fragment, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+//import { Fragment } from "react";
+//import { useNavigate } from "react-router-dom";
 import {
   // HiOutlineSearch,
-  HiOutlineChatAlt,
+  //HiOutlineChatAlt,
   HiOutlineBell,
 } from "react-icons/hi";
-import { Menu, Popover, Transition } from "@headlessui/react";
-import classNames from "classnames";
-import { AuthContext, useAuth } from "../../context/AuthContext";
+
+//import { useAuth } from "../../context/AuthContext";
 
 export default function Header() {
-  const { setValue_ } = useAuth();
-  const navigate = useNavigate();
+  // const { setValue_ }: any = useAuth();
+  // const navigate = useNavigate();
 
-  const handleLogout = (_e) => {
-    localStorage.removeItem("token");
-    setValue_(null);
-    navigate("/auth/login");
-  };
+  // const handleLogout = (_e: any) => {
+  //   localStorage.removeItem("token");
+  //   setValue_(null);
+  //   navigate("/auth/login");
+  // };
   return (
     <>
       <div className="bg-white h-16 px-4 flex justify-between items-center">
-        <div className="relative  border border-gray-200">
-          {/* <HiOutlineSearch
-            fontSize={20}
-            className="text-gray-400 absolute top-1/2 -translate-y-1/2 left-3"
-          />
-          <input
-            type="text"
-            placeholder="search..."
-            className="text-sm focus:outline-none active:outline-none h-10 w-[24rem] border-gray-300 rounded-sm px-4 pl-11 pr-4"
-          /> */}
-        </div>
+        <div className="relative  border border-gray-200"></div>
         <div className="flex items-center gap-2 mr-2">
-          <Popover className="relative">
-            {({ open }) => (
+          <div className="relative">
+            {/* {({ open }) => (
               <>
-                <Popover.Button
-                  className={classNames(
-                    open && "bg-gray-100",
-                    "p-1.5 rounded-sm inline-flex item-center text-gray hove:text-opacity-100 focus:outline-none active:bg-gray-100"
-                  )}
+                <Button
+                  className={ 
+                   "bg-gray-100  p-1.5 rounded-sm inline-flex item-center text-gray hove:text-opacity-100 focus:outline-none active:bg-gray-100 "
+                  
+                  }
                 >
                   <HiOutlineChatAlt fontSize={24} />
-                </Popover.Button>
+                </Button>
                 <Transition
                   as={Fragment}
                   enter="transition ease-out duration-200"
@@ -63,12 +52,12 @@ export default function Header() {
                   </Popover.Panel>
                 </Transition>
               </>
-            )}
-          </Popover>
+            )} */}
+          </div>
           <HiOutlineBell fontSize={24} />
-          <Menu as="div" className="relative inline-block text-left">
+          <div className="relative inline-block text-left">
             <div>
-              <Menu.Button className="ml-2 inline-flex rounded-full outline-none focus:ring-2 focus:ring-neutral-400 ">
+              {/* <Menu.Button className="ml-2 inline-flex rounded-full outline-none focus:ring-2 focus:ring-neutral-400 ">
                 <span className="sr-only">bg open</span>
                 <div
                   className="h-10 w-10 rounded-full bg-sly-500 bg-cover bg-no-repeat bg-center"
@@ -79,9 +68,9 @@ export default function Header() {
                 >
                   <span className="sr-only">Hugh Jackson</span>
                 </div>
-              </Menu.Button>
+              </Menu.Button> */}
             </div>
-            <Transition
+            {/* <Transition
               as={Fragment}
               enter="transition ease-out duration-100"
               enterFrom="transform opacity-0 scale-95"
@@ -131,8 +120,8 @@ export default function Header() {
                   </Menu.Item>
                 </div>
               </Menu.Items>
-            </Transition>
-          </Menu>
+            </Transition> */}
+          </div>
         </div>
       </div>
     </>

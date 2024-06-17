@@ -1,17 +1,17 @@
 import { useState } from "react";
-const AuthChangePassword = ({ onSubmit }) => {
+const AuthChangePassword = ({ onSubmit }: any) => {
   const [password, setPassword] = useState({
     password: "",
     repeatpassword: "",
   });
 
-  const handleChangeInput = (e) => {
+  const handleChangeInput = (e: { target: { name: any; value: any } }) => {
     setPassword({
       ...password,
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     onSubmit(password);
   };

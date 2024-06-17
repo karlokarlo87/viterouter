@@ -19,11 +19,11 @@ const UsersView = () => {
   const payload = tokenDecode(tocken);
 
   const handleSubmitChangePassword = (data: Resset) => {
-    const newData = { tocken, ...data };
+    // const newData = { tocken, ...data };
 
-    createUserMutation.mutate(newData);
+    createUserMutation.mutate(data);
   };
-  const changePasswordModule = (e) => {
+  const changePasswordModule = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setIsFormSuccess(!isFormSuccess);
   };
@@ -31,7 +31,7 @@ const UsersView = () => {
   useEffect(() => {
     isFormSuccess ? setIsFormSuccess(isSuccess) : null;
     isFormSuccess
-      ? localStorage.setItem("token", createUserMutation.data.data.token)
+      ? localStorage.setItem("token", createUserMutation.data?.data.token)
       : null;
   }, [isSuccess]);
 
@@ -288,6 +288,7 @@ const UsersView = () => {
                     onSubmit={handleSubmitChangePassword}
                     setIsFormSuccess={setIsFormSuccess}
                     isSuccess={isSuccess}
+                    token={tocken}
                   />
                 </td>
               </tr>

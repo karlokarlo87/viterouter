@@ -1,24 +1,30 @@
 import { useState } from "react";
 import UserPassValidation from "../../validators/UserPassValidation";
 import SuccessMessage from "../messagebox/SuccessMessage";
-const UserChangePassword = ({ onSubmit, isSuccess, setIsFormSuccess }) => {
+const UserChangePassword = ({
+  onSubmit,
+  isSuccess,
+  setIsFormSuccess,
+  token,
+}: any) => {
   const [password, setPassword] = useState({
     password: "",
     repeatpassword: "",
     passwort_update: Date.now(),
+    token: token,
   });
 
   const [errors, setError] = useState({
     password: "",
     repeatpassword: "",
   });
-  const handleChangeInput = (e) => {
+  const handleChangeInput = (e: { target: { name: any; value: any } }) => {
     setPassword({
       ...password,
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const newErrors = UserPassValidation(password);
     setError(newErrors);
