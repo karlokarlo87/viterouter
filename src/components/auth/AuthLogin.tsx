@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useAuthUser } from "../../services/mutation";
 import { Auth } from "../../types/Auth";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 //import { useAuth } from "../../context/AuthContext";
 //import axios from "axios";
 
 const AuthLogin = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
   const [isDeactivate, setIsDeactivate] = useState(false);
   const createUserMutation = useAuthUser();
@@ -23,7 +23,7 @@ const AuthLogin = () => {
     } else if (createUserMutation.data?.data.status == "deactivate") {
       setIsDeactivate(true);
     } else if (createUserMutation.isSuccess) {
-      navigate("/dashboard", { replace: true });
+      //  navigate("/dashboard", { replace: true });
     }
   }, [createUserMutation.isSuccess]);
   const handleOnFocus = () => {

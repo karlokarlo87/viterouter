@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, useMemo } from "react";
 
-import AuthLogin from "../components/auth/AuthLogin.tsx";
+//import AuthLogin from "../components/auth/AuthLogin.tsx";
 import axios from "axios";
 import { tokenDecode, isTokenExpired } from "../functions/tokenDecode";
 
@@ -8,9 +8,7 @@ export const AuthContext1 = createContext({});
 
 export const AuthContext = ({ children }: any) => {
   //const [value1, setValue_] = useState(localStorage.getItem("token") || null);
-  const [value1, setValue_] = useState<any[]>([
-    localStorage.getItem("token") || null,
-  ]);
+  const [value1, setValue_] = useState(localStorage.getItem("token") || null);
   const payload = tokenDecode(value1);
   const istockenexpared = isTokenExpired(value1);
 
@@ -32,19 +30,23 @@ export const AuthContext = ({ children }: any) => {
     }),
     [value1]
   );
-
-  if (istockenexpared || payload.active === 0) {
-    return (
-      <AuthContext1.Provider value={contextValue}>
-        <AuthLogin />
-      </AuthContext1.Provider>
-    );
-  } else
-    return (
-      <AuthContext1.Provider value={contextValue}>
-        {children}
-      </AuthContext1.Provider>
-    );
+  return (
+    <AuthContext1.Provider value={contextValue}>
+      {children}
+    </AuthContext1.Provider>
+  );
+  // if (istockenexpared || payload.active === 0) {
+  //   return (
+  //     <AuthContext1.Provider value={contextValue}>
+  //       <AuthLogin />
+  //     </AuthContext1.Provider>
+  //   );
+  // } else
+  //   return (
+  //     <AuthContext1.Provider value={contextValue}>
+  //       {children}
+  //     </AuthContext1.Provider>
+  //   );
 };
 
 export const useAuth = () => {
