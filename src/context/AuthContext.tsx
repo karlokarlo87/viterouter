@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, useMemo } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 //import AuthLogin from "../components/auth/AuthLogin.tsx";
 import axios from "axios";
@@ -31,9 +31,11 @@ export const AuthContext = ({ children }: any) => {
   //   }),
   //   [value1]
   // );
-  <AuthContext1.Provider value={{ value1, setValue_ }}>
-    {children}
-  </AuthContext1.Provider>;
+  return (
+    <AuthContext1.Provider value={{ value1, setValue_ }}>
+      {children}
+    </AuthContext1.Provider>
+  );
 
   // if (istockenexpared || payload.active === 0) {
   //   return (
