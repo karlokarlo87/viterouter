@@ -38,7 +38,6 @@ export function useAuthUser() {
     onSuccess: async (data) => {
       if (data?.data.status != 401 && data?.data.status != "deactivate") {
         localStorage.setItem("token", data?.data);
-
         setValue_(data?.data);
       }
     },
