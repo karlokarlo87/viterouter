@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, useMemo } from "react";
 
-//import AuthLogin from "../components/auth/AuthLogin.tsx";
+import AuthLogin from "../components/auth/AuthLogin.tsx";
 import axios from "axios";
 import { tokenDecode, isTokenExpired } from "../functions/tokenDecode";
 
@@ -31,23 +31,19 @@ export const AuthContext = ({ children }: any) => {
     }),
     [value1]
   );
-  return (
-    <AuthContext1.Provider value={contextValue}>
-      {children}
-    </AuthContext1.Provider>
-  );
-  // if (istockenexpared || payload.active === 0) {
-  //   return (
-  //     <AuthContext1.Provider value={contextValue}>
-  //       <AuthLogin />
-  //     </AuthContext1.Provider>
-  //   );
-  // } else
-  //   return (
-  //     <AuthContext1.Provider value={contextValue}>
-  //       {children}
-  //     </AuthContext1.Provider>
-  //   );
+
+  if (istockenexpared || payload.active === 0) {
+    return (
+      <AuthContext1.Provider value={contextValue}>
+        <AuthLogin />
+      </AuthContext1.Provider>
+    );
+  } else
+    return (
+      <AuthContext1.Provider value={contextValue}>
+        {children}
+      </AuthContext1.Provider>
+    );
 };
 
 export const useAuth = () => {
