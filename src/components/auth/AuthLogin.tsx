@@ -11,7 +11,7 @@ const AuthLogin = () => {
   // const navigate = useNavigate();
 
   const usersIdsQuery = useUsersId(0);
-  const usersIdsQueryMap = usersIdsQuery.data["user"];
+  const usersIdsQueryMap = usersIdsQuery.data;
   console.log(usersIdsQueryMap);
   const [isLogin, setIsLogin] = useState(false);
   const [isDeactivate, setIsDeactivate] = useState(false);
