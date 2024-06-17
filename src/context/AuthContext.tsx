@@ -12,10 +12,11 @@ export const AuthContext = ({ children }: any) => {
   const payload = tokenDecode(value1);
   const istockenexpared = isTokenExpired(value1);
 
-  const BASE_URL = "https://shoppingcart/api";
+  const BASE_URL = "https://shoppingcart.ge/api";
   axios.defaults.baseURL = BASE_URL;
   axios.defaults.headers.common["Authorization"] = "Bearer " + value1;
   axios.defaults.headers.common["Content-Type"] = "application/json";
+
   useEffect(() => {
     if (istockenexpared || payload.active === 0) {
       axios.defaults.headers.common["Authorization"] = "";

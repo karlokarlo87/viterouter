@@ -6,7 +6,7 @@ import { UserCreate } from "../types/UserCreate";
 //import { useAuth } from "../context/AuthContext";
 let getToken = localStorage.getItem("token");
 
-const BASE_URL = "https://shoppingcart/api";
+const BASE_URL = "https://shoppingcart.ge/api";
 const axiosInstance = axios;
 
 const axiosInstanceCheck = axios.create({
