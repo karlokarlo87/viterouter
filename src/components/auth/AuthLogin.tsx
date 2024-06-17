@@ -16,7 +16,6 @@ const AuthLogin = () => {
 
   const { handleSubmit, register } = useForm<Auth>();
   const handleCreateUserSubmit: SubmitHandler<Auth> = async (data: Auth) => {
-    //event.preventDefault();
     createUserMutation.mutate(data);
   };
   useEffect(() => {
