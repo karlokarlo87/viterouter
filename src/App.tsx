@@ -1,5 +1,5 @@
 import "./App.css";
-import Header from "./conmpnents/content";
+import Header from "./conmpnents/header";
 import Footer from "./conmpnents/footer";
 import Content from "./conmpnents/content";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
@@ -8,13 +8,13 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Header />} />
-          <Route path="/header" element={<Header />} />
-          <Route path="/footer" element={<Footer />} />
-          <Route path="/content" element={<Content />} />
+          <Route path="/" element={<Header />}>
+            <Route index path="/header" element={<Header />} />
+            <Route path="/footer" element={<Footer />} />
+            <Route path="/content" element={<Content />} />
+          </Route>
         </Routes>
       </BrowserRouter>
-      <Outlet />
     </>
   );
 }
