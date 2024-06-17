@@ -24,26 +24,29 @@ export const AuthContext = ({ children }: any) => {
     }
   }, [value1]);
 
-  const contextValue = useMemo(
-    () => ({
-      value1,
-      setValue_,
-    }),
-    [value1]
-  );
+  // const contextValue = useMemo(
+  //   () => ({
+  //     value1,
+  //     setValue_,
+  //   }),
+  //   [value1]
+  // );
+  <AuthContext1.Provider value={{ value1, setValue_ }}>
+    {children}
+  </AuthContext1.Provider>;
 
-  if (istockenexpared || payload.active === 0) {
-    return (
-      <AuthContext1.Provider value={contextValue}>
-        {children}
-      </AuthContext1.Provider>
-    );
-  } else
-    return (
-      <AuthContext1.Provider value={contextValue}>
-        {children}
-      </AuthContext1.Provider>
-    );
+  // if (istockenexpared || payload.active === 0) {
+  //   return (
+  //     <AuthContext1.Provider value={{ value1, setValue_ }}>
+  //       {children}
+  //     </AuthContext1.Provider>
+  //   );
+  // } else
+  //   return (
+  //     <AuthContext1.Provider value={{ value1, setValue_ }}>
+  //       {children}
+  //     </AuthContext1.Provider>
+  //   );
 };
 
 export const useAuth = () => {
