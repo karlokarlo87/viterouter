@@ -2,27 +2,27 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 //import AuthLogin from "../components/auth/AuthLogin.tsx";
 import axios from "axios";
-import { tokenDecode, isTokenExpired } from "../functions/tokenDecode";
+//import { tokenDecode, isTokenExpired } from "../functions/tokenDecode";
 
 export const AuthContext1 = createContext({});
 
 export const AuthContext = ({ children }: any) => {
   //const [value1, setValue_] = useState(localStorage.getItem("token") || null);
   const [value1, setValue_] = useState(localStorage.getItem("token") || null);
-  const payload = tokenDecode(value1);
-  const istockenexpared = isTokenExpired(value1);
+  //const payload = tokenDecode(value1);
+  //const istockenexpared = isTokenExpired(value1);
 
   const BASE_URL = "https://shoppingcart.ge/api";
   axios.defaults.baseURL = BASE_URL;
   axios.defaults.headers.common["Authorization"] = "Bearer " + value1;
   axios.defaults.headers.common["Content-Type"] = "application/json";
 
-  useEffect(() => {
-    if (istockenexpared || payload.active === 0) {
-      axios.defaults.headers.common["Authorization"] = "";
-      localStorage.removeItem("token");
-    }
-  }, [value1]);
+  // useEffect(() => {
+  //   if (istockenexpared || payload.active === 0) {
+  //     axios.defaults.headers.common["Authorization"] = "";
+  //     localStorage.removeItem("token");
+  //   }
+  // }, [value1]);
 
   // const contextValue = useMemo(
   //   () => ({
