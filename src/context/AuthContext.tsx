@@ -35,7 +35,7 @@ export const AuthContext = ({ children }: any) => {
   if (istockenexpared || payload.active === 0) {
     return (
       <AuthContext1.Provider value={contextValue}>
-        <AuthLogin />
+        {children}
       </AuthContext1.Provider>
     );
   } else
