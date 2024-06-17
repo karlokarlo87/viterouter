@@ -14,7 +14,7 @@ function App() {
           <Route path="/content" element={<Content />} />
         </Routes>
       </BrowserRouter>
-      {<Outlet />}
+      <Outlet />
     </>
   );
 }
