@@ -1,63 +1,50 @@
 //import { Fragment } from "react";
 //import { useNavigate } from "react-router-dom";
+//import { Button } from "flowbite-react";
 import {
   // HiOutlineSearch,
   //HiOutlineChatAlt,
   HiOutlineBell,
+  HiOutlineChatAlt,
 } from "react-icons/hi";
 
-//import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
-  // const { setValue_ }: any = useAuth();
-  // const navigate = useNavigate();
+  const { setValue_ }: any = useAuth();
+  const navigate = useNavigate();
 
-  // const handleLogout = (_e: any) => {
-  //   localStorage.removeItem("token");
-  //   setValue_(null);
-  //   navigate("/auth/login");
-  // };
+  const handleLogout = (_e: any) => {
+    localStorage.removeItem("token");
+    setValue_(null);
+    navigate("/auth/login");
+  };
   return (
     <>
       <div className="bg-white h-16 px-4 flex justify-between items-center">
         <div className="relative  border border-gray-200"></div>
         <div className="flex items-center gap-2 mr-2">
           <div className="relative">
-            {/* {({ open }) => (
-              <>
-                <Button
-                  className={ 
-                   "bg-gray-100  p-1.5 rounded-sm inline-flex item-center text-gray hove:text-opacity-100 focus:outline-none active:bg-gray-100 "
-                  
-                  }
-                >
-                  <HiOutlineChatAlt fontSize={24} />
-                </Button>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-200"
-                  enterFrom="opacity-0 translate-y-1"
-                  enterTo="opacity-100 translate-y-0"
-                  leave="transition ease-in duration-150"
-                  leaveFrom="opacity-100 translate-y-0"
-                  leaveTo="opacity-0 translate-y-1"
-                >
-                  <Popover.Panel className="absolute right-0 z-10 mt-2.5 w-80">
-                    <div className="bg-white raounded-sn shadow-md right-1 ring-black ring-opacity-5 px-2 py-2">
-                      <strong className="text-grey-700 font-medium">
-                        message
-                      </strong>
-                      <div className="mt-2 text-sm">this is panel</div>
-                    </div>
-                  </Popover.Panel>
-                </Transition>
-              </>
-            )} */}
+            <button
+              className={
+                "bg-gray-100  p-1.5 rounded-sm inline-flex item-center text-gray hove:text-opacity-100 focus:outline-none active:bg-gray-100 "
+              }
+            >
+              <HiOutlineChatAlt fontSize={24} />
+            </button>
+
+            <div className="absolute right-0 z-10 mt-2.5 w-80">
+              <div className="bg-white raounded-sn shadow-md right-1 ring-black ring-opacity-5 px-2 py-2">
+                <strong className="text-grey-700 font-medium">message</strong>
+                <div className="mt-2 text-sm">this is panel</div>
+              </div>
+            </div>
           </div>
           <HiOutlineBell fontSize={24} />
           <div className="relative inline-block text-left">
             <div>
-              {/* <Menu.Button className="ml-2 inline-flex rounded-full outline-none focus:ring-2 focus:ring-neutral-400 ">
+              <div className="ml-2 inline-flex rounded-full outline-none focus:ring-2 focus:ring-neutral-400 ">
                 <span className="sr-only">bg open</span>
                 <div
                   className="h-10 w-10 rounded-full bg-sly-500 bg-cover bg-no-repeat bg-center"
@@ -68,59 +55,32 @@ export default function Header() {
                 >
                   <span className="sr-only">Hugh Jackson</span>
                 </div>
-              </Menu.Button> */}
+              </div>
             </div>
-            {/* <Transition
-              as={Fragment}
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
-            >
-              <Menu.Items className="origin-top-right z-10 absolute ring-black right-0 mt-2 w-48 rounded-sm shadow-md p-1 bg-white ring-1 ring-opacity-5 focus:outline-none">
+            <div>
+              <div className="origin-top-right z-10 absolute ring-black right-0 mt-2 w-48 rounded-sm shadow-md p-1 bg-white ring-1 ring-opacity-5 focus:outline-none">
                 <div className="px-1 py-1 ">
-                  <Menu.Item>
-                    {({ active }) => (
-                      <div
-                        className={classNames(
-                          active && "bg-gray-100",
-                          "text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2"
-                        )}
-                      >
-                        your profile
-                      </div>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <div
-                        className={classNames(
-                          active && "bg-gray-100",
-                          "text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2"
-                        )}
-                      >
-                        settings
-                      </div>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <div
-                        onClick={handleLogout}
-                        className={classNames(
-                          active && "bg-gray-100",
-                          "text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2"
-                        )}
-                      >
-                        Logout
-                      </div>
-                    )}
-                  </Menu.Item>
+                  <div>
+                    <div className="bg-gray-100 text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2">
+                      your profile
+                    </div>
+                  </div>
+                  <div>
+                    <div className="bg-gray-100  text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2">
+                      settings
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      onClick={handleLogout}
+                      className="bg-gray-100   text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2"
+                    >
+                      Logout
+                    </div>
+                  </div>
                 </div>
-              </Menu.Items>
-            </Transition> */}
+              </div>
+            </div>
           </div>
         </div>
       </div>
