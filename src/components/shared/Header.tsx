@@ -34,7 +34,7 @@ export default function Header() {
               <HiOutlineChatAlt fontSize={24} />
             </button>
 
-            <div className="absolute right-0 z-10 mt-2.5 w-80">
+            <div className="absolute right-0 z-10 mt-2.5 w-80 none">
               <div className="bg-white raounded-sn shadow-md right-1 ring-black ring-opacity-5 px-2 py-2">
                 <strong className="text-grey-700 font-medium">message</strong>
                 <div className="mt-2 text-sm">this is panel</div>

@@ -15,11 +15,11 @@ const UsersView = () => {
   const [isFormSuccess, setIsFormSuccess] = useState(false);
 
   const createUserMutation = useUpdatePassword();
-  const tocken = localStorage.getItem("token");
+  const tocken = localStorage.getItem("token") || undefined;
   const payload = tokenDecode(tocken);
 
   const handleSubmitChangePassword = (data: Resset) => {
-    // const newData = { tocken, ...data };
+    data = { tocken, ...data };
 
     createUserMutation.mutate(data);
   };
