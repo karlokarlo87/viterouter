@@ -1,21 +1,17 @@
-//import { Fragment } from "react";
-//import { useNavigate } from "react-router-dom";
-//import { Button } from "flowbite-react";
-import {
-  // HiOutlineSearch,
-  //HiOutlineChatAlt,
-  HiOutlineBell,
-  HiOutlineChatAlt,
-} from "react-icons/hi";
+import { HiOutlineBell, HiOutlineChatAlt } from "react-icons/hi";
 
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { MouseEvent } from "react";
 
 export default function Header() {
   const { setValue_ }: any = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = (_e: any) => {
+  const handleLogout = (
+    e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>
+  ) => {
+    e.preventDefault();
     localStorage.removeItem("token");
     setValue_(null);
     navigate("/auth/login");
@@ -72,7 +68,7 @@ export default function Header() {
                   </div>
                   <div>
                     <div
-                      onClick={handleLogout}
+                      onClick={(e) => handleLogout(e)}
                       className="bg-gray-100   text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2"
                     >
                       Logout
