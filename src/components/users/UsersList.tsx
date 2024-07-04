@@ -9,18 +9,32 @@ import {
 } from "react";
 import { useUsersId } from "../../services/querises";
 
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
+import { MdOutlineCreate } from "react-icons/md";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { Pagination } from "flowbite-react";
+
 //import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 const PostList = () => {
+  const navigate = useNavigate();
   let { from }: any = useParams();
+  const [currentPage, setCurrentPage] = useState(2);
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+    navigate("/users/limit/" + page);
+  };
+  useEffect(() => {
+    setCurrentPage(parseInt(from));
+  });
+  console.log(currentPage);
   const usersIdsQuery = useUsersId(from);
   const [_isError, setIsError] = useState(false);
   useEffect(() => {
     setIsError(usersIdsQuery.isError);
   }, [usersIdsQuery.isError]);
   if (_isError) {
-    // setValue_(null);
     axios.defaults.headers.common["Authorization"] = "";
     localStorage.removeItem("token");
     return <Navigate to="/auth/login" />;
@@ -33,29 +47,20 @@ const PostList = () => {
   }
 
   const usersIdsQueryMap = usersIdsQuery.data["user"];
+  const usersCountMap = usersIdsQuery.data["count"];
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
           <div>
-            <button
-              id="dropdownActionButton"
-              data-dropdown-toggle="dropdownAction"
-              className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            <Link
               type="button"
+              className="whitespace-nowrap bg-blue-700 text-white font-medium text-sm leading-5 text-center pl-5 pr-5 pb-2 pt-2 rounded-lg items-center inline-flex cursor-pointer hover:bg-blue-800"
+              to={"/users/create"}
             >
-              <span className="sr-only">Action button</span>
-              Action
-              <svg
-                className="w-2.5 h-2.5 ms-2.5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 10 6"
-              >
-                <path stroke="currentColor" d="m1 1 4 4 4-4" />
-              </svg>
-            </button>
+              <MdOutlineCreate className="w-5 h-5 -ml-1 mr-1 block align-middle" />
+              Create User
+            </Link>
           </div>
           <label htmlFor="table-search" className="sr-only">
             Search
@@ -182,65 +187,15 @@ const PostList = () => {
           </tbody>
         </table>
       </div>
-
-      <nav
-        aria-label="Page navigation example"
-        className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
-      >
-        <ul className="flex items-center -space-x-px h-8 text-sm">
-          <li>
-            <a
-              href="#"
-              className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              <span className="sr-only">Previous</span>
-              <svg
-                className="w-2.5 h-2.5 rtl:rotate-180"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-              >
-                <path stroke="currentColor" d="M5 1 1 5l4 4" />
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              1
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              2
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#"
-              className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              <span className="sr-only">Next</span>
-              <svg
-                className="w-2.5 h-2.5 rtl:rotate-180"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-              >
-                <path stroke="currentColor" d="m1 9 4-4-4-4" />
-              </svg>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div className="flex overflow-x-auto sm:justify-center">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(usersCountMap / 20)}
+          onPageChange={onPageChange}
+          showIcons
+          layout="pagination"
+        />
+      </div>
     </>
   );
 };

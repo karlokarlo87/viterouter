@@ -71,7 +71,7 @@ export default function Sidebar() {
                 : "text-neutral-400",
               linkClass
             )}
-            to="users/limit/0"
+            to="users/limit/1"
           >
             <HiOutlineUsers />
             <span className="text-xl">Customers</span>

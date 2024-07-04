@@ -36,14 +36,16 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
 
   function handleChange(e: any) {
     const fr = new FileReader();
-    fr.readAsArrayBuffer(e.target.files[0]);
-    const result = fr.result;
-    if (result)
-      fr.onload = function () {
+    fr.readAsArrayBuffer(e.target.files[0] || null);
+
+    fr.onload = function () {
+      const result = fr.result;
+      if (result != null) {
         const blob = new Blob([result]);
         const image = URL.createObjectURL(blob);
         setFileImage(image);
-      };
+      }
+    };
     setUsers({ ...users, ["file"]: e.target.files[0] });
   }
 
@@ -145,7 +147,6 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
           </label>
           <input
             className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            aria-describedby="user_avatar_help"
             id="file"
             type="file"
             onChange={handleChange}
@@ -190,8 +191,8 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
             onChange={handleChangeInput}
             name="name"
             value={users["name"]}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="First Name"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
         <div>
@@ -210,8 +211,8 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
             onChange={handleChangeInput}
             name="lname"
             value={users["lname"]}
+            placeholder="Last Name"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Doe"
           />
         </div>
         <UserFormInput
@@ -238,8 +239,8 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
             onChange={handleChangeInput}
             name="birth_date"
             value={users["birth_date"]}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="birth date"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
         <div>
@@ -281,8 +282,8 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
             onChange={handleChangeInput}
             name="adress"
             value={users["adress"]}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="adress"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
 
@@ -315,10 +316,7 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
             >
               city
             </label>
-            <select
-              // {...register("city_id")}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            >
+            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
               <option>tbilisi</option>
               <option>batumi</option>
               <option>kutaisi</option>
@@ -343,8 +341,8 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
               onChange={handleChangeInput}
               name="role"
               value={users["role"]}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               placeholder="role"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
             />
           </div>
         </div>

@@ -1,13 +1,13 @@
-import { userValidation } from "../types/UserValidation";
+import { UserCreate } from "../types/UserCreate";
 
-export default function UserValidation(values: userValidation) {
+export default function userCreateValidation(values: UserCreate) {
   const errors = {
     id: "",
     name: "",
     lname: "",
     username: "",
-    //password: "",
-    //repeatpassword: "",
+    password: "",
+    repeatpassword: "",
     role: "",
     email: "",
     adress: "",
@@ -21,10 +21,11 @@ export default function UserValidation(values: userValidation) {
     city_id: "",
     facebook: "",
     google: "",
+    active: "",
   };
 
   const emailpatern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-  //const passpatern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+  const passpatern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
   const phonepatern = /^\d{9}$/;
   if (values.name === "") {
     errors.name = "name is required !";
@@ -48,14 +49,14 @@ export default function UserValidation(values: userValidation) {
   if (values.birth_date === "") {
     errors.birth_date = "birth date is required !";
   }
-  // if (values.password === "") {
-  //   errors.password = "password is requiered !";
-  // } else if (!passpatern.test(values.password)) {
-  //   errors.password =
-  //     "password must be above 8 characters and uppercase lowwer case and number ";
-  // }
+  if (values.password === "") {
+    errors.password = "password is requiered !";
+  } else if (!passpatern.test(values.password)) {
+    errors.password =
+      "password must be above 8 characters and uppercase lowwer case and number ";
+  }
 
-  // if (values.password !== values.repeatpassword)
-  //   errors.repeatpassword = "password dosnot match";
+  if (values.password !== values.repeatpassword)
+    errors.repeatpassword = "password dosnot match";
   return errors;
 }

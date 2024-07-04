@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   // HiOutlineSearch,
   HiOutlineChatAlt,
@@ -7,15 +7,21 @@ import {
 } from "react-icons/hi";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import classNames from "classnames";
-//import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
+import { tokenDecode } from "../../functions/tokenDecode";
+
+interface IQuestion {
+  value1?: string;
+}
 
 export default function Header() {
-  //const { setValue_ } = useAuth();
+  const { value1 }: IQuestion = useAuth();
   const navigate = useNavigate();
+  const userId = tokenDecode(value1).id;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    //setValue_(null);
+
     navigate("/auth/login");
   };
   return (
@@ -94,14 +100,15 @@ export default function Header() {
                 <div className="px-1 py-1 ">
                   <Menu.Item>
                     {({ active }: any) => (
-                      <div
+                      <Link
                         className={classNames(
                           active && "bg-gray-100",
-                          "text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2"
+                          "text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2 block"
                         )}
+                        to={"/users/view/" + userId}
                       >
                         your profile
-                      </div>
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>

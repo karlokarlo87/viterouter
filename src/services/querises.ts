@@ -28,8 +28,6 @@ export function useUserById(id: string) {
   return useQuery({
     queryKey: ["users/", { id }],
     queryFn: async () => await getUserById(id),
-    staleTime: Infinity,
-    //refetchInterval: 1000,
     refetchOnWindowFocus: false,
   });
 }

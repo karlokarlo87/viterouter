@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useUpdateUser } from "../../services/mutation";
 import UserForm from "./UserForm";
 import { userValidation } from "../../types/UserValidation";
+import axios from "axios";
 
 const Post = () => {
   const { id } = useParams();
@@ -19,8 +20,11 @@ const Post = () => {
   if (usersIdsQuery.isError) {
     return <span>Error Loading !</span>;
   }
-
+  console.log(usersIdsQuery.dataUpdatedAt);
+  console.log(Date.now());
   const handleSubmit = async (updatedPost: userValidation) => {
+    console.log(axios.defaults.headers.common["Authorization"]);
+    console.log(localStorage.getItem("token"));
     const newdata = { id, ...updatedPost };
     await createUserMutation.mutate(newdata);
   };

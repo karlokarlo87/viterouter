@@ -42,7 +42,6 @@ export function useAuthUser() {
       }
     },
     onError: (error) => {
-      // An error happened!
       console.log(error);
     },
   });
@@ -54,6 +53,7 @@ export function useCreateUser() {
     mutationKey: ["users/create"],
 
     mutationFn: async (data: UserCreate) => {
+      console.log(data);
       await createUser(data);
     },
 

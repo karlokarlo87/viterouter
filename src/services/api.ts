@@ -3,23 +3,14 @@ import { Users } from "../types/Users";
 import { Auth } from "../types/Auth";
 import { Resset } from "../types/Resset";
 import { UserCreate } from "../types/UserCreate";
-//import { useAuth } from "../context/AuthContext";
-let getToken = localStorage.getItem("token");
 
-const BASE_URL = "https://shoppingcart.ge/api";
+const BASE_URL = "http://localhost:3000/api"; // "https://shoppingcart.ge/api";
 const axiosInstance = axios;
 
 const axiosInstanceCheck = axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
-  },
-});
-const axiosInstanceFile = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    Authorization: `Bearer ${getToken}`,
-    "Content-Type": "multipart/form-data",
   },
 });
 
@@ -54,6 +45,14 @@ export const authUser = async (data: Auth) => {
   return await axiosInstance.post("auth/login", data);
 };
 export const updateUser = async (data: any) => {
+  let getToken = localStorage.getItem("token");
+  const axiosInstanceFile = axios.create({
+    baseURL: BASE_URL,
+    headers: {
+      Authorization: `Bearer ${getToken}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return await axiosInstanceFile.patch(`users/update`, data);
 };
 export const ressetPassword = async (data: Resset) => {

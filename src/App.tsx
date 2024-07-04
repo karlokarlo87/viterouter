@@ -23,7 +23,6 @@ import Categories from "./components/Categories.tsx";
 import NotFound from "./components/notfound/NotFound.tsx";
 
 function App() {
-  console.log(123);
   return (
     <>
       <BrowserRouter>
