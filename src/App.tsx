@@ -21,6 +21,7 @@ import Customer from "./components/Customer.tsx";
 import Product from "./components/Product.tsx";
 import Categories from "./components/Categories.tsx";
 import NotFound from "./components/notfound/NotFound.tsx";
+import ProtectedRoute from "./functions/protected.tsx";
 
 function App() {
   return (
@@ -28,10 +29,31 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="products" element={<Products />} />
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="products"
+              element={
+                <ProtectedRoute>
+                  <Products />
+                </ProtectedRoute>
+              }
+            />
             <Route path="product" element={<Product />} />
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route
+              path="dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
             <Route path="orders" element={<Orders />} />
             <Route path="order" element={<Order />} />
             <Route path="customers" element={<Customers />} />

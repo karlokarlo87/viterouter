@@ -11,11 +11,9 @@ import { useUsersId } from "../../services/querises";
 
 import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
 import { MdOutlineCreate } from "react-icons/md";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
 import { Pagination } from "flowbite-react";
 
-//import { useAuth } from "../../context/AuthContext";
-import axios from "axios";
 const PostList = () => {
   const navigate = useNavigate();
   let { from }: any = useParams();
@@ -30,15 +28,7 @@ const PostList = () => {
   });
   console.log(currentPage);
   const usersIdsQuery = useUsersId(from);
-  const [_isError, setIsError] = useState(false);
-  useEffect(() => {
-    setIsError(usersIdsQuery.isError);
-  }, [usersIdsQuery.isError]);
-  if (_isError) {
-    axios.defaults.headers.common["Authorization"] = "";
-    localStorage.removeItem("token");
-    return <Navigate to="/auth/login" />;
-  }
+
   if (usersIdsQuery.isPending) {
     return <span>...loading</span>;
   }

@@ -8,6 +8,7 @@ import UserValidation from "../../validators/UserValidation";
 import { EamilFindUser, PhoneFindUser } from "../../services/querises";
 import UserFormInput from "./UserFormInputs";
 import { tokenDecode } from "../../functions/tokenDecode";
+import { Datepicker } from "flowbite-react";
 const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
   const [emailErrors, setEmailErrors] = useState("");
   const [phoneErrors, setPhoneErrors] = useState("");
@@ -82,7 +83,14 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
       [e.target.name]: e.target.value,
     });
   };
-
+  const handleChangeInputDate = (date: any) => {
+    const d = new Date(date).toLocaleDateString("fr-FR");
+    console.log(d);
+    setUsers({
+      ...users,
+      ["birth_date"]: d,
+    });
+  };
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
@@ -234,13 +242,11 @@ const UserForm = ({ onSubmit, initialValue, createUserMutation }: any) => {
               " Birth Date "
             )}
           </label>
-          <input
-            type="text"
-            onChange={handleChangeInput}
+
+          <Datepicker
             name="birth_date"
+            onSelectedDateChanged={handleChangeInputDate}
             value={users["birth_date"]}
-            placeholder="birth date"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
         <div>

@@ -16,6 +16,7 @@ interface IQuestion {
 
 export default function Header() {
   const { value1 }: IQuestion = useAuth();
+
   const navigate = useNavigate();
   const userId = tokenDecode(value1).id;
 
