@@ -9,7 +9,7 @@ import {
 } from "react";
 import { useUsersId } from "../../services/querises";
 
-import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { MdOutlineCreate } from "react-icons/md";
 
 import { Pagination } from "flowbite-react";

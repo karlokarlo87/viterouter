@@ -1,6 +1,4 @@
 import { useCreateUser } from "../../services/mutation";
-import { UserCreate } from "../../types/UserCreate";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { Datepicker } from "flowbite-react";
 import { EamilFindUser, PhoneFindUser } from "../../services/querises";
 import { useEffect, useState } from "react";

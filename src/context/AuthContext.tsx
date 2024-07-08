@@ -1,13 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-//import AuthLogin from "../components/auth/AuthLogin.tsx";
 import axios from "axios";
 import { tokenDecode, isTokenExpired } from "../functions/tokenDecode";
 
 export const AuthContext1 = createContext({});
 
 export const AuthContext = ({ children }: any) => {
-  const [auth, setIsAuth] = useState(true);
+  const [auth, setIsAuth] = useState(
+    localStorage.getItem("token") ? true : false
+  );
   const [value1, setValue_] = useState(localStorage.getItem("token") || null);
   const payload = tokenDecode(value1);
   const istockenexpared = isTokenExpired(value1);
@@ -36,7 +37,6 @@ export const AuthContext = ({ children }: any) => {
       if (error.response && error.response.status === 401) {
         setIsAuth(false);
       }
-      // Handle other errors here
     }
   );
 

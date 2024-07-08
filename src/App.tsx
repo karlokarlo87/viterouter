@@ -29,41 +29,48 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route
-              index
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="products"
-              element={
-                <ProtectedRoute>
-                  <Products />
-                </ProtectedRoute>
-              }
-            />
+            <Route index element={<Dashboard />} />
+            <Route path="products" element={<Products />} />
             <Route path="product" element={<Product />} />
-            <Route
-              path="dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="dashboard" element={<Dashboard />} />
             <Route path="orders" element={<Orders />} />
             <Route path="order" element={<Order />} />
             <Route path="customers" element={<Customers />} />
             <Route path="customer" element={<Customer />} />
             <Route path="categories" element={<Categories />} />
             <Route path="users">
-              <Route path="limit/:from/" element={<UsersList />} />
-              <Route path=":id" element={<Users />} />
-              <Route path="create" element={<UserCreate />} />
-              <Route path="view/:id" element={<UsersView />} />
+              <Route
+                path="limit/:from/"
+                element={
+                  <ProtectedRoute>
+                    <UsersList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":id"
+                element={
+                  <ProtectedRoute>
+                    <Users />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="create"
+                element={
+                  <ProtectedRoute>
+                    <UserCreate />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="view/:id"
+                element={
+                  <ProtectedRoute>
+                    <UsersView />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Route>
