@@ -96,43 +96,9 @@ const PostList = () => {
             </tr>
           </thead>
           <tbody>
-            {usersIdsQueryMap.map(
-              (
-                data: {
-                  image: string;
-                  name: string;
-                  lname: string;
-                  email:
-                    | string
-                    | number
-                    | boolean
-                    | ReactElement<any, string | JSXElementConstructor<any>>
-                    | Iterable<ReactNode>
-                    | ReactPortal
-                    | null
-                    | undefined;
-                  role:
-                    | string
-                    | number
-                    | boolean
-                    | ReactElement<any, string | JSXElementConstructor<any>>
-                    | Iterable<ReactNode>
-                    | ReactPortal
-                    | null
-                    | undefined;
-                  phone:
-                    | string
-                    | number
-                    | boolean
-                    | ReactElement<any, string | JSXElementConstructor<any>>
-                    | Iterable<ReactNode>
-                    | ReactPortal
-                    | null
-                    | undefined;
-                  id: string;
-                },
-                index: Key | null | undefined
-              ) => (
+            {usersIdsQueryMap &&
+              Array.isArray(usersIdsQueryMap.data) &&
+              usersIdsQueryMap.data.map((data: any, index: number) => (
                 <tr
                   key={index}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -172,8 +138,7 @@ const PostList = () => {
                     </Link>
                   </td>
                 </tr>
-              )
-            )}
+              ))}
           </tbody>
         </table>
       </div>
