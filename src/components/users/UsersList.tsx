@@ -1,12 +1,4 @@
-import {
-  JSXElementConstructor,
-  Key,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { useUsersId } from "../../services/querises";
 
 import { useParams, Link, useNavigate } from "react-router-dom";
