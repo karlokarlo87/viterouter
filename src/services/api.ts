@@ -4,7 +4,7 @@ import { Auth } from "../types/Auth";
 import { Resset } from "../types/Resset";
 import { UserCreate } from "../types/UserCreate";
 
-const BASE_URL = "http://localhost:3000/api"; // "https://shoppingcart.ge/api";
+const BASE_URL = "https://shopapi-production-be4f.up.railway.app/api"; // "https://shoppingcart.ge/api";
 const axiosInstance = axios;
 
 const axiosInstanceCheck = axios.create({
