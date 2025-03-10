@@ -9,7 +9,7 @@ import { Pagination } from "flowbite-react";
 const PostList = () => {
   const navigate = useNavigate();
   let { from }: any = useParams();
-  const [currentPage, setCurrentPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const onPageChange = (page: number) => {
     setCurrentPage(page);
@@ -30,6 +30,7 @@ const PostList = () => {
 
   const usersIdsQueryMap = usersIdsQuery.data["user"];
   const usersCountMap = usersIdsQuery.data["count"];
+  console.log(usersIdsQueryMap)
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -88,9 +89,10 @@ const PostList = () => {
             </tr>
           </thead>
           <tbody>
-            {usersIdsQueryMap &&
-              Array.isArray(usersIdsQueryMap.data) &&
-              usersIdsQueryMap.data.map((data: any, index: number) => (
+          {Array.isArray(usersIdsQueryMap) && usersIdsQueryMap.length > 0 &&
+  usersIdsQueryMap.map((data: any, index: number) => (
+
+             
                 <tr
                   key={index}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
