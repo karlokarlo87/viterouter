@@ -5,14 +5,12 @@ import Header from "./Header";
 export default function Layout() {
   return (
     <>
-      <div className="flex flex-row overflow-hidden">
+      <div className="antialiased bg-gray-50 dark:bg-gray-900">
+        <Header />
         <Sidebar />
-        <div className="flex-1 w-[calc(100vw-240px)] ml-[240px]">
-          <Header />
-          <div className="p-4">
-            <div>{<Outlet />}</div>
-          </div>
-        </div>
+        <main className="xl:p-4 p-0 xl:ml-64 xl:pt-20 pt-20 mt-15 border-l ">
+          {<Outlet />}
+        </main>
       </div>
     </>
   );

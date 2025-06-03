@@ -19,10 +19,11 @@ import Order from "./components/Order.tsx";
 import Customers from "./components/Customers.tsx";
 import Customer from "./components/Customer.tsx";
 import Product from "./components/Product.tsx";
-import Categories from "./components/Categories.tsx";
+import Categories from "./components/cat/Categories.tsx";
 import NotFound from "./components/notfound/NotFound.tsx";
 import ProtectedRoute from "./functions/protected.tsx";
-
+import ProfileView from "./components/profile/ProfileView";
+import PasswordChange from "./components/profile/PasswordChange";
 function App() {
   return (
     <>
@@ -72,6 +73,22 @@ function App() {
                 }
               />
             </Route>
+            <Route
+              path="profile"
+              element={
+                <ProtectedRoute>
+                  <ProfileView />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="passwordchange"
+              element={
+                <ProtectedRoute>
+                  <PasswordChange />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Route>
 

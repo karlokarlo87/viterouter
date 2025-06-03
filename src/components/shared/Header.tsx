@@ -1,148 +1,206 @@
-import { Fragment } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
-import {
-  // HiOutlineSearch,
-  HiOutlineChatAlt,
-  HiOutlineBell,
-} from "react-icons/hi";
-import { Menu, Popover, Transition } from "@headlessui/react";
-import classNames from "classnames";
+
 import { useAuth } from "../../context/AuthContext";
 import { tokenDecode } from "../../functions/tokenDecode";
-
+import { Avatar, Dropdown } from "flowbite-react";
+import imgUrl from "../../assets/small_logo.png";
+import {
+  MdOutlineWifiPassword,
+  MdOutlineManageAccounts,
+  MdOutlineEmail,
+} from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 interface IQuestion {
   value1?: string;
 }
 
 export default function Header() {
   const { value1 }: IQuestion = useAuth();
-
+  const name = tokenDecode(value1).name;
+  const lname = tokenDecode(value1).lname;
+  const email = tokenDecode(value1).email;
   const navigate = useNavigate();
-  const userId = tokenDecode(value1).id;
+   
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-
     navigate("/auth/login");
   };
   return (
     <>
-      <div className="bg-white h-16 px-4 flex justify-between items-center">
-        <div className="relative  border border-gray-200">
-          {/* <HiOutlineSearch
-            fontSize={20}
-            className="text-gray-400 absolute top-1/2 -translate-y-1/2 left-3"
-          />
-          <input
-            type="text"
-            placeholder="search..."
-            className="text-sm focus:outline-none active:outline-none h-10 w-[24rem] border-gray-300 rounded-sm px-4 pl-11 pr-4"
-          /> */}
-        </div>
-        <div className="flex items-center gap-2 mr-2">
-          <Popover className="relative">
-            {({ open }: any) => (
-              <>
-                <Popover.Button
-                  className={classNames(
-                    open && "bg-gray-100",
-                    "p-1.5 rounded-sm inline-flex item-center text-gray hove:text-opacity-100 focus:outline-none active:bg-gray-100"
-                  )}
-                >
-                  <HiOutlineChatAlt fontSize={24} />
-                </Popover.Button>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-200"
-                  enterFrom="opacity-0 translate-y-1"
-                  enterTo="opacity-100 translate-y-0"
-                  leave="transition ease-in duration-150"
-                  leaveFrom="opacity-100 translate-y-0"
-                  leaveTo="opacity-0 translate-y-1"
-                >
-                  <Popover.Panel className="absolute right-0 z-10 mt-2.5 w-80">
-                    <div className="bg-white raounded-sn shadow-md right-1 ring-black ring-opacity-5 px-2 py-2">
-                      <strong className="text-grey-700 font-medium">
-                        message
-                      </strong>
-                      <div className="mt-2 text-sm">this is panel</div>
-                    </div>
-                  </Popover.Panel>
-                </Transition>
-              </>
-            )}
-          </Popover>
-          <HiOutlineBell fontSize={24} />
-          <Menu as="div" className="relative inline-block text-left">
-            <div>
-              <Menu.Button className="ml-2 inline-flex rounded-full outline-none focus:ring-2 focus:ring-neutral-400 ">
-                <span className="sr-only">bg open</span>
-                <div
-                  className="h-10 w-10 rounded-full bg-sly-500 bg-cover bg-no-repeat bg-center"
-                  style={{
-                    backgroundImage:
-                      'url("https://images.unsplash.com/photo-1548918901-9b31223c5c3a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=80&ixid=MnwxfDB8MXxyYW5kb218MHx8ZmFjZXx8fHx8fDE3MDMxNTM0NTM&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=80")',
-                  }}
-                >
-                  <span className="sr-only">Hugh Jackson</span>
-                </div>
-              </Menu.Button>
-            </div>
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
+      <nav className="font-['custom-3'] bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
+        <div className="min-w-[300px] flex flex-wrap justify-between items-center">
+          <div className="flex justify-start items-center">
+            <button
+              data-drawer-target="drawer-navigation"
+              data-drawer-toggle="drawer-navigation"
+              aria-controls="drawer-navigation"
+              className="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer xl:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
-              <Menu.Items className="origin-top-right z-10 absolute ring-black right-0 mt-2 w-48 rounded-sm shadow-md p-1 bg-white ring-1 ring-opacity-5 focus:outline-none">
-                <div className="px-1 py-1 ">
-                  <Menu.Item>
-                    {({ active }: any) => (
-                      <Link
-                        className={classNames(
-                          active && "bg-gray-100",
-                          "text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2 block"
-                        )}
-                        to={"/users/view/" + userId}
-                      >
-                        your profile
-                      </Link>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }: any) => (
-                      <div
-                        className={classNames(
-                          active && "bg-gray-100",
-                          "text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2"
-                        )}
-                      >
-                        settings
-                      </div>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }: any) => (
-                      <div
-                        onClick={handleLogout}
-                        className={classNames(
-                          active && "bg-gray-100",
-                          "text-gray-700 focus:bg-gray-200 cursor-pointer rounded round-sm px-4 py-2"
-                        )}
-                      >
-                        Logout
-                      </div>
-                    )}
-                  </Menu.Item>
+              <svg
+                aria-hidden="true"
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="hidden w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            </button>
+            <Link className="flex items-center justify-between mr-4" to={"/"}>
+              <img src={imgUrl} className="mr-3 h-8" />
+            </Link>
+          </div>
+          <div className="flex items-center lg:order-2">
+            <Dropdown
+              className="max-w-sm text-base list-none bg-gray-50 dark:bg-gray-600 dark:text-gray-300 rounded divide-y"
+              arrowIcon={false}
+              inline
+              label={
+                <div className="border p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                  <span className="sr-only">View notifications</span>
+
+                  <svg
+                    aria-hidden="true"
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+                  </svg>
                 </div>
-              </Menu.Items>
-            </Transition>
-          </Menu>
+              }
+            >
+              <Dropdown.Item className="p-0 m-0 px-0 py-0">
+                <div className="overflow-hidden z-50 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 dark:divide-gray-600 dark:bg-gray-700 ">
+                  <div className="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300">
+                    Notifications
+                  </div>
+                  <div>
+                    <a
+                      href="#"
+                      className="flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-600"
+                    >
+                      <div className="flex-shrink-0">
+                        <img
+                          className="w-11 h-11 rounded-full"
+                          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/robert-brown.png"
+                          alt="Robert image"
+                        />
+                        <div className="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-purple-500 rounded-full border border-white dark:border-gray-700">
+                          <svg
+                            aria-hidden="true"
+                            className="w-3 h-3 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="pl-3 w-full text-left">
+                        <div className="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
+                          <span className="font-semibold text-gray-900 dark:text-white">
+                            Robert Brown
+                          </span>
+                          posted a new video: Glassmorphism - learn how to
+                          implement the new design trend.
+                        </div>
+                        <div className="text-xs font-medium text-primary-600 dark:text-primary-500">
+                          3 hours ago
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <a
+                    href="#"
+                    className="block py-2 text-md font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-600 dark:text-white dark:hover:underline"
+                  >
+                    <div className="inline-flex items-center">
+                      <svg
+                        aria-hidden="true"
+                        className="mr-2 w-4 h-4 text-gray-500 dark:text-gray-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                        <path
+                          fillRule="evenodd"
+                          d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      View all
+                    </div>
+                  </a>
+                </div>
+              </Dropdown.Item>
+            </Dropdown>
+
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={<Avatar rounded size="sm"></Avatar>}
+            >
+              <Dropdown.Header className="px-0 py-0">
+                <div className="py-3 px-4">
+                  <span className="flex block text-sm font-semibold text-gray-900 dark:text-white">
+                    <CgProfile className="flex items-center text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white mr-2 text-xl" />
+                    {name} {lname}
+                  </span>
+                  <span className="flex block text-sm text-gray-900 truncate dark:text-white mt-2">
+                    <MdOutlineEmail className="flex items-center text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white mr-2 text-xl" />
+                    {email}
+                  </span>
+                </div>
+              </Dropdown.Header>
+              <Dropdown.Item>
+                <Link
+                  to={"profile"}
+                  className="flex block text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+                >
+                  <MdOutlineManageAccounts className="flex items-center text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white mr-2 text-xl" />
+                  პროფილი
+                </Link>
+              </Dropdown.Item>
+
+              <Dropdown.Item>
+                <Link
+                  to={"passwordchange"}
+                  className="flex block text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+                >
+                  <MdOutlineWifiPassword className="flex items-center text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white mr-2 text-xl" />
+                  პაროლის შეცვლა
+                </Link>
+              </Dropdown.Item>
+
+              <Dropdown.Divider />
+              <Dropdown.Item onClick={handleLogout}>გამოსვლა</Dropdown.Item>
+            </Dropdown>
+          </div>
         </div>
-      </div>
+      </nav>
     </>
   );
 }

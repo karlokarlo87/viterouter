@@ -17,4 +17,31 @@
     font-variation-settings: normal;
     -webkit-tap-highlight-color: transparent;
   }
+  @font-face {
+    font-family: "Custom-1";
+    src: url("./assets/fonts/helvetica-caps.ttf");
+  }
+
+  @font-face {
+    font-family: "Custom-2";
+    src: url("./assets/fonts/HelveticaBlack.ttf");
+  }
+  @font-face {
+    font-family: "Custom-3";
+    src: url("./assets/fonts/HelveticaBold.ttf");
+  }
+
+  @font-face {
+    font-family: "Custom-4";
+    src: url("./assets/fonts/HelveticaMedium.ttf");
+  }
+  @font-face {
+    font-family: "Custom-5";
+    src: url("./assets/fonts/helveticaroman-webfont.woff");
+  }
+
+  @font-face {
+    font-family: "Custom-6";
+    src: url("./assets/fonts/HelveticaRoman.ttf");
+  }
 }
